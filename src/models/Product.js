@@ -1,14 +1,11 @@
-const Sequelize = require('sequelize')
-const { sequelize } = require('../db')
+module.exports = (sequelize, DataTypes) => {
+  var Product = sequelize.define('product', {
+    id: { type: DataTypes.STRING, primaryKey: true },
+    name: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.STRING, allowNull: false },
+    image: { type: DataTypes.STRING },
+    type: { type: DataTypes.STRING }
+  })
 
-const Product = sequelize.define('product', {
-  id: { type: Sequelize.STRING, primaryKey: true },
-  name: { type: Sequelize.STRING, allowNull: false },
-  price: { type: Sequelize.STRING, allowNull: false },
-  image: { type: Sequelize.STRING },
-  type: { type: Sequelize.STRING }
-})
-
-module.exports = {
-  Product
+  return Product
 }
