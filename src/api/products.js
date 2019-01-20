@@ -6,34 +6,18 @@ const { Product } = require('../models')
 let products = Router()
 
 products.get(
-  '/small-appliances',
+  '/',
   [
     check('limit').isNumeric({ no_symbols: true }),
-    check('offset').isNumeric({ no_symbols: true })
+    check('offset').isNumeric({ no_symbols: true }),
+    check('category').isIn(['small-appliances', 'dishwashers', undefined])
   ],
   validate,
   async (req, res) => {
-    const { limit, offset } = req.query
+    const { limit, offset, category } = req.query
+    const condition = category && { type: category }
     const response = await Product.findAll({
-      where: { type: 'small-appliances' },
-      offset,
-      limit
-    })
-    res.status(200).json(response)
-  }
-)
-
-products.get(
-  '/dishwashers',
-  [
-    check('limit').isNumeric({ no_symbols: true }),
-    check('offset').isNumeric({ no_symbols: true })
-  ],
-  validate,
-  async (req, res) => {
-    const { limit, offset } = req.query
-    const response = await Product.findAll({
-      where: { type: 'dishwashers' },
+      where: condition,
       offset,
       limit
     })
