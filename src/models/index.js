@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const config = require('../config')
 
 const Product = require('./Product')
+const User = require('./User')
 
 const db = {}
 
@@ -28,5 +29,6 @@ const sequelize = new Sequelize(
 )
 
 db['Product'] = Product(sequelize, Sequelize)
+db['User'] = User(sequelize, Sequelize)
 
 module.exports = db
