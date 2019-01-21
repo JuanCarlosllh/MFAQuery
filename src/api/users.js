@@ -34,4 +34,16 @@ users.get('/:id', async (req, res) => {
     return res.status(500).send()
   }
 })
+
+users.get('/username/:username', async (req, res) => {
+  const { username } = req.params
+  try {
+    const user = await User.findOne({ where: { username: username } })
+    if (user) return res.status(200).json(user)
+    else return res.status(404).send()
+  } catch (err) {
+    console.error(err)
+    return res.status(500).send()
+  }
+})
 module.exports = users
