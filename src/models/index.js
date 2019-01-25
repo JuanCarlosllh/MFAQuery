@@ -31,4 +31,8 @@ const sequelize = new Sequelize(
 db['Product'] = Product(sequelize, Sequelize)
 db['User'] = User(sequelize, Sequelize)
 
+// Relations
+db['Product'].belongsToMany(db['User'], { through: 'UserProduct' })
+db['User'].belongsToMany(db['Product'], { through: 'UserProduct' })
+
 module.exports = db

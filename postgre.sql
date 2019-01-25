@@ -11,3 +11,11 @@ CREATE TABLE users(
   username TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL
 )
+
+CREATE TABLE "UserProduct"(
+  "userId" TEXT NOT NULL,
+  "productId" TEXT NOT NULL,
+  PRIMARY KEY ("userId", "productId"),
+  FOREIGN KEY ("userId") REFERENCES users(id) ON UPDATE CASCADE,
+  FOREIGN KEY ("productId") REFERENCES products(id) ON UPDATE CASCADE
+)

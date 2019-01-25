@@ -1,3 +1,5 @@
+const db = require('./')
+
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('product', {
     id: { type: DataTypes.STRING, primaryKey: true },
