@@ -47,17 +47,4 @@ users.get('/username/:username', async (req, res) => {
   }
 })
 
-users.get('/:id/favorites', async (req, res) => {
-  const { id } = req.params
-  try {
-    const user = await User.findByPk(id)
-    const favorites = await user.getProducts()
-    console.log(favorites)
-    res.status(200).json(favorites)
-  } catch (e) {
-    console.error(e)
-    res.status(500).send()
-  }
-})
-
 module.exports = users
