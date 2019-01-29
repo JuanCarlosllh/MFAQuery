@@ -14,6 +14,13 @@ app.use(bodyParser.json())
 
 app.use(middleware({ config }))
 app.use('/', api({ config }))
+app.use((err, req, res, next) => {
+  if (!err) next()
+  else {
+    console.error(err)
+    res.status(500).send()
+  }
+})
 app.server.listen(process.env.PORT || config.port, () => {
   console.log(`Started on port ${app.server.address().port}`)
 })

@@ -1,7 +1,7 @@
 const { Router } = require('express')
 
 const { validate, check } = require('../middleware/validation')
-const { Product, User } = require('../models')
+const { Product } = require('../models')
 
 let products = Router()
 
@@ -26,7 +26,7 @@ products.get(
     if (orderBy) {
       order.push([orderBy, orderDirection || 'ASC'])
     }
-    const response = await Product.findAll({
+    const response = await Product.findAndCountAll({
       where: condition,
       offset,
       limit,
